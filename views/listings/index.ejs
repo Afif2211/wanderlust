@@ -1,0 +1,63 @@
+<% layout("/layouts/boilerplate") %> 
+
+<body>
+    
+    <div class="listings-container">
+
+        <div class="listings-header">
+
+            <h2 class="listings-heading">
+                All Listings
+            </h2>
+
+            <a href="/listings/new" class="new-listing-btn">
+                + Create New Listing
+            </a>
+
+        </div>
+
+        <div class="listings-grid">
+
+            <% for (let listing of allListings) { %>
+
+                <a 
+                    href="/listings/<%= listing._id %>" 
+                    class="listing-link"
+                >
+
+                    <div class="listing-box">
+
+                        <img 
+                            src="<%= listing.image.url %>" 
+                            alt="listing image"
+                            class="listing-image"
+                        >
+
+                        <div class="listing-content">
+
+                            <h3 class="listing-box-title">
+                                <%= listing.title %>
+                            </h3>
+
+                            <p class="listing-price">
+                                £<%= listing.price %>
+                            </p>
+
+                            <p class="listing-location">
+                                <%= listing.location %>, 
+                                <%= listing.country %>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            <% } %>
+
+        </div>
+
+    </div>
+
+</body>

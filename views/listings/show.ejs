@@ -1,0 +1,215 @@
+<% layout("/layouts/boilerplate") %>
+
+<body>
+
+    <div class="listing-details-container">
+
+        <div class="listing-card">
+
+            <img 
+                src="<%= listing.image.url %>" 
+                alt="listing image"
+                class="show-listing-image"
+            >
+
+            <h3 class="listing-title">
+                <%= listing.title %>
+            </h3>
+
+            <p class="listing-description">
+                <%= listing.description %>
+            </p>
+
+            <div class="listing-info">
+                <p><strong>Owner:</strong> <%= listing.owner.username %></p>
+                <p><strong>Price:</strong> £<%= listing.price %></p>
+                <p><strong>Location:</strong> <%= listing.location %></p>
+                <p><strong>Country:</strong> <%= listing.country %></p>
+            </div>
+
+            <div class="listing-actions">
+
+                <% if(currUser && currUser._id.equals(listing.owner._id)) { %>
+
+                    <a 
+                        href="/listings/<%= listing._id %>/edit"
+                        class="edit-btn"
+                    >
+                        Edit Listing
+                    </a>
+
+                    <form 
+                        method="POST" 
+                        action="/listings/<%= listing._id %>?_method=DELETE"
+                    >
+                        <button type="submit" class="delete-btn">
+                            Delete
+                        </button>
+                    </form>
+
+                <% } %>
+
+            </div>
+
+            <!-- REVIEW FORM -->
+
+            <% if(currUser) { %>
+
+                <div class="review-container">
+
+                    <h3>Leave a Review</h3>
+
+                    <form 
+                        method="POST" 
+                        action="/listings/<%= listing._id %>/reviews" 
+                        class="needs-validation" 
+                        novalidate
+                    >
+
+                        <div class="review-bar">
+
+                            <label for="rating">
+                                Rating: <span id="ratingValue">3</span>/5
+                            </label>
+
+                            <input 
+                                type="range" 
+                                min="1" 
+                                max="5" 
+                                step="1"
+                                id="rating" 
+                                name="review[rating]"
+                                value="3"
+                                oninput="document.getElementById('ratingValue').innerText = this.value"
+                            >
+
+                            <div class="rating-scale">
+                                <span>1</span>
+                                <span>2</span>
+                                <span>3</span>
+                                <span>4</span>
+                                <span>5</span>
+                            </div>
+
+                        </div>
+
+                        <div class="review-bar">
+
+                            <textarea 
+                                id="comment" 
+                                name="review[comment]" 
+                                placeholder="Write your review" 
+                                required
+                            ></textarea>
+
+                            <div class="invalid-feedback">
+                                Please add some comments
+                            </div>
+
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+
+                        </div>
+
+                        <button type="submit">
+                            Submit
+                        </button>
+
+                    </form>
+
+                </div>
+
+            <% } %>
+
+            <!-- REVIEWS LIST -->
+
+            <div class="reviews-section">
+
+                <h3>All Reviews</h3>
+
+                <% if(listing.reviews.length === 0) { %>
+
+                    <p class="no-review">
+                        No reviews yet
+                    </p>
+
+                <% } %>
+
+                <% for(let review of listing.reviews) { %>
+
+                    <div class="review-item">
+
+                        <div class="review-comment">
+                            Posted by: @<%= review.author.username %>
+                        </div>
+
+                        <div class="review-rating">
+
+                            <% for(let i = 1; i <= 5; i++) { %>
+
+                                <% if(i <= review.rating) { %>
+
+                                    <span class="star filled">⭐</span>
+
+                                <% } else { %>
+
+                                    <span class="star">☆</span>
+
+                                <% } %>
+
+                            <% } %>
+
+                            <span class="rating-number">
+                                (<%= review.rating %>/5)
+                            </span>
+
+                        </div>
+
+                        <div class="review-comment">
+                            <%= review.comment %>
+                        </div>
+
+                        <div class="delete-container">
+
+                            <form 
+                                action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE"  
+                                method="POST"
+                            >
+                                <button>
+                                    Delete
+                                </button>
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                <% } %>
+
+            </div>
+
+        </div>
+
+        <!-- MAP SECTION — now below the listing card, outside of it -->
+
+        <div class="listing-map-section">
+            <h3>Location</h3>
+            <div id="map"></div>
+        </div>
+
+    </div>
+
+    <!-- MAP DATA -->
+
+    <script>
+        const coordinates = <%- JSON.stringify(listing.geometry?.coordinates || [0,0]) %>;
+        const mapToken = "<%= mapToken %>";
+        const listingTitle = "<%= listing.title %>";
+    </script>
+
+    <!-- MAP JS -->
+
+    <script src="/js/map.js"></script>
+
+</body>

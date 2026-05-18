@@ -1,0 +1,96 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="signup-page">
+
+    <div class="signup-card">
+
+        <h1 class="signup-title">
+            Create Your Account
+        </h1>
+
+        <p class="signup-subtitle">
+            Join Wanderlust and explore amazing places
+        </p>
+
+        <form 
+            action="/signup" 
+            method="POST" 
+            class="signup-form needs-validation" 
+            novalidate
+        >
+
+            <!-- Username -->
+            <div class="signup-field">
+
+                <label for="username" class="signup-label">
+                    Username
+                </label>
+
+                <input 
+                    class="signup-input"
+                    name="username" 
+                    id="username"
+                    type="text"
+                    placeholder="Enter your username"
+                    required
+                >
+
+                <div class="invalid-feedback">
+                    Username is required
+                </div>
+
+            </div>
+
+            <!-- Email -->
+            <div class="signup-field">
+
+                <label for="email" class="signup-label">
+                    Email Address
+                </label>
+
+                <input 
+                    class="signup-input"
+                    name="email" 
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+                <div class="invalid-feedback">
+                    Email is required
+                </div>
+
+            </div>
+
+            <!-- Password -->
+            <div class="signup-field">
+
+                <label for="password" class="signup-label">
+                    Password
+                </label>
+
+                <input 
+                    class="signup-input"
+                    name="password" 
+                    id="password"
+                    type="password"
+                    placeholder="Create a password"
+                    required
+                >
+
+                <div class="invalid-feedback">
+                    Password is required
+                </div>
+
+            </div>
+
+            <button class="signup-btn">
+                Sign Up
+            </button>
+
+        </form>
+
+    </div>
+
+</div>

@@ -1,0 +1,111 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="edit-form-container">
+
+    <h2 class="edit-form-heading">Edit Listing</h2>
+
+    <form 
+    action="/listings/<%= listing._id %>?_method=PATCH" 
+    method="POST"
+    class="edit-listing-form needs-validation"
+    novalidate
+    enctype="multipart/form-data"
+    >
+
+        <!-- Title -->
+        <div class="form-group">
+            <input 
+                class="edit-form-input"
+                name="title" 
+                type="text" 
+                value="<%= listing.title %>"
+                required
+            >
+            <div class="invalid-feedback">Title is required</div>
+        </div>
+
+        <!-- Description -->
+        <div class="form-group">
+            <textarea 
+                class="edit-form-input edit-form-textarea"
+                name="description"
+                required
+            ><%= listing.description %></textarea>
+            <div class="invalid-feedback">Description is required</div>
+        </div>
+
+        <!-- Image -->
+        <!-- Current Image -->
+        <div class="form-group">
+
+        <label class="edit-form-label">
+            Current Image
+        </label>
+
+        <img 
+            src="<%= listing.image.url %>" 
+            alt="listing image"
+            class="edit-preview-image"
+        >
+
+        </div>
+
+        <!-- Upload New Image -->
+        <div class="form-group">
+
+        <label class="edit-form-label">
+            Upload New Image
+        </label>
+
+        <input 
+            class="edit-form-input"
+            name="image" 
+            type="file"
+            accept="image/*"
+        >
+
+</div>
+
+        <!-- Price -->
+        <div class="form-group">
+            <input 
+                class="edit-form-input"
+                name="price" 
+                type="text" 
+                value="<%= listing.price %>"
+                required
+            >
+            <div class="invalid-feedback">Price is required</div>
+        </div>
+
+        <!-- Location -->
+        <div class="form-group">
+            <input 
+                class="edit-form-input"
+                name="location" 
+                type="text" 
+                value="<%= listing.location %>"
+                required
+            >
+            <div class="invalid-feedback">Location is required</div>
+        </div>
+
+        <!-- Country -->
+        <div class="form-group">
+            <input 
+                class="edit-form-input"
+                name="country" 
+                type="text" 
+                value="<%= listing.country %>"
+                required
+            >
+            <div class="invalid-feedback">Country is required</div>
+        </div>
+
+        <button class="edit-form-btn" type="submit">
+            Update Listing
+        </button>
+
+    </form>
+
+</div>

@@ -1,0 +1,167 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="form-container">
+
+    <h1 class="form-heading">
+        Create New Listing
+    </h1>
+
+    <form 
+        action="/listings" 
+        method="POST" 
+        class="listing-form needs-validation" 
+        novalidate 
+        enctype="multipart/form-data"
+    >
+
+        <!-- TITLE -->
+        <div class="form-group">
+
+            <label class="form-label">
+                Listing Title
+            </label>
+
+            <input 
+                class="form-input"
+                name="title" 
+                placeholder="Enter listing title" 
+                type="text"
+                required
+            >
+
+            <div class="invalid-feedback">
+                Title is required
+            </div>
+
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+
+        </div>
+
+        <!-- DESCRIPTION -->
+        <div class="form-group">
+
+            <label class="form-label">
+                Description
+            </label>
+
+            <textarea 
+                class="form-input form-textarea"
+                name="description" 
+                placeholder="Describe your property"
+                required
+            ></textarea>
+
+            <div class="invalid-feedback">
+                Description is required
+            </div>
+
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+
+        </div>
+
+        <!-- IMAGE -->
+        <div class="form-group">
+
+            <label class="form-label">
+                Upload Listing Image
+            </label>
+
+            <input 
+                class="form-input file-input"
+                name="image" 
+                type="file"
+                accept="image/*"
+            >
+
+            <small class="file-help-text">
+                JPG, PNG or WEBP images recommended
+            </small>
+
+        </div>
+
+        <!-- PRICE -->
+        <div class="form-group">
+
+            <label class="form-label">
+                Price
+            </label>
+
+            <input 
+                class="form-input"
+                name="price" 
+                placeholder="Enter price" 
+                type="text"
+                required
+            >
+
+            <div class="invalid-feedback">
+                Price is required
+            </div>
+
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+
+        </div>
+
+        <!-- LOCATION -->
+        <div class="form-group">
+
+            <label class="form-label">
+                Location
+            </label>
+
+            <input 
+                class="form-input"
+                name="location" 
+                placeholder="Enter location" 
+                type="text"
+                required
+            >
+
+            <div class="invalid-feedback">
+                Location is required
+            </div>
+
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+
+        </div>
+
+        <!-- COUNTRY -->
+        <div class="form-group">
+
+            <label class="form-label">
+                Country
+            </label>
+
+            <input 
+                class="form-input"
+                name="country" 
+                placeholder="Enter country name" 
+                type="text"
+                required
+            >
+
+            <div class="invalid-feedback">
+                Country is required
+            </div>
+
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+
+        </div>
+
+        <button class="form-btn" type="submit">
+            Add Listing
+        </button>
+
+    </form>
+
+</div>
